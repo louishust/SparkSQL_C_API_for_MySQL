@@ -60,20 +60,21 @@ def run_sql(_url_user_password_tuple_tuple,
         for i in xrange(len(_tables_tuple)):
             uuptt += _url_user_password_tuple_tuple
     else:
-        uuptt += _url_user_password_tuple_tuple
+        uuptt = _url_user_password_tuple_tuple
 
     spark_session = SparkSession.builder.master(_master_string) \
         .appName(_appname_string) \
         .config("spark.some.config.option", "some-value") \
         .getOrCreate()
     spark_session = spark_session.newSession()
+
     for i in xrange(len(_tables_tuple)):
         table = spark_session.read.format("jdbc").options(
             url=uuptt[i][0],
             driver="com.mysql.jdbc.Driver",
             dbtable=_tables_tuple[i],
             user=uuptt[i][1],
-            password=uuptt[i][1]
+            password=uuptt[i][2]
         ).load()
         table.createOrReplaceTempView(_tables_alia_tuple[i])
     table = spark_session.sql(_sql_string)
@@ -89,9 +90,7 @@ def run_sql(_url_user_password_tuple_tuple,
 
 
 if __name__ == "__main__":
-    run_sql("jdbc:mysql://localhost:3306/test",
-            "root",
-            "123",
+    run_sql((("jdbc:mysql://localhost:3306/test", "root", "123"),),
             ("pet1", "pet2", "pet3"),
             "select * from pet1 union select * from pet2 union select * from pet3",
-            "target")
+            "target2")
