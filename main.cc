@@ -15,7 +15,7 @@ int main()
     run_sql(_url_user_password_vector_vector,
             _tables_vector,
             _sql_string,
-            _target_name_string, 
+            _target_name_string,
             _target_vector,
             _master_string,
             _appname_string,
