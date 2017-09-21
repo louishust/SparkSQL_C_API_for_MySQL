@@ -8,18 +8,14 @@ int main()
     VectorString _tables_vector;
     string _sql_string;
     string _target_name_string;
-    VectorString _target_vector = VectorString();
-    string _master_string = "local";
-    string _appname_string = "run_sql";
-    VectorString _tables_alias_vector = VectorString();
+    // VectorString _target_vector = VectorString();
+    // string _master_string = "local";
+    // string _appname_string = "run_sql";
+    // VectorString _tables_alias_vector = VectorString();
     run_sql(_url_user_password_vector_vector,
             _tables_vector,
             _sql_string,
-            _target_name_string,
-            _target_vector,
-            _master_string,
-            _appname_string,
-            _tables_alias_vector);
+            _target_name_string);
     cout << "success" << endl;
     return 0;
 }
