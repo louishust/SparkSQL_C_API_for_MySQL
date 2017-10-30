@@ -74,3 +74,4 @@ Thumbs.db
 
 .cmaketools.json
 
+build/
