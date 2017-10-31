@@ -14,22 +14,23 @@ namespace dbscale
 class sparksql
 {
 public:
-    string url;
-    string user;
-    string password;
-    map<string, string> dbtable;
-    string sql;
-    string dst_table;
-    string spark_master;
-    PyObject *py_module;
-    PyObject *py_class;
-    PyObject *py_moduledict;
-    void run();
-    sparksql();
-    ~sparksql();
+  string url;
+  string user;
+  string password;
+  map<string, string> dbtable;
+  string sql;
+  string dst_table;
+  string spark_master;
+
+  void run();
+  sparksql();
+  ~sparksql();
 
 private:
-    void setValueToPython();
+  PyObject *py_module;
+  PyObject *py_moduledict;
+  PyObject *py_class_sparksql;
+  void setValueToPython();
 };
 }
 
