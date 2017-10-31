@@ -11,13 +11,14 @@ using namespace std;
 
 namespace dbscale
 {
+typedef map<string, string> MAP_ALIA_SQL;
 class sparksql
 {
 public:
   string url;
   string user;
   string password;
-  map<string, string> dbtable;
+  MAP_ALIA_SQL dbtable;
   string sql;
   string dst_table;
   string spark_master;
@@ -30,6 +31,8 @@ private:
   PyObject *py_module;
   PyObject *py_moduledict;
   PyObject *py_class_sparksql;
+
+
   void setValueToPython();
 };
 }
