@@ -5,7 +5,7 @@ using namespace dbscale;
 int main()
 {
   sparksql ss;
-  ss.url = "jdbc://127.0.0.1:3306";
+  ss.url = "jdbc:mysql://localhost:3306/test";
   ss.user = "root";
   ss.password = "abc123";
   MAP_ALIA_SQL dbt;
@@ -18,7 +18,5 @@ int main()
   ss.dst_table = "target";
   ss.spark_master = "local[2]";
   ss.run();
-  ss.url = "something";
-  cout << ss.url << endl;
   return 0;
 }

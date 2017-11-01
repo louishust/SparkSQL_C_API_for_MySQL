@@ -34,6 +34,7 @@ private:
 
 
   void setValueToPython();
+  void checkValue();
 };
 }
 

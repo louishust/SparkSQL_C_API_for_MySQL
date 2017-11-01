@@ -15,7 +15,7 @@ class DBScaleSparksql(object):
     url = ""
     user = ""
     password = ""
-    dbtable = {}# {T1:Q1, T2:Q2, ... }
+    dbtable = {}  # {T1:Q1, T2:Q2, ... }
     sql = ""
     dst_table = ""
     spark_master = ""
@@ -49,6 +49,8 @@ class DBScaleSparksql(object):
         """
             get_dbtable
         """
+        for alia in _dbtable:
+            _dbtable[alia] = '(' + _dbtable[alia] + ')' + alia
         DBScaleSparksql.dbtable = _dbtable
         return 1
 
@@ -141,12 +143,12 @@ if __name__ == "__main__":
     DBSS.get_url("jdbc:mysql://localhost:3306/test")
     DBSS.get_user("root")
     DBSS.get_password("abc123")
-    DBSS.get_dbtable({"select * from pet1": "pet1",
-                      "select * from pet2": "pet2",
-                      "select * from pet3": "pet3"})
+    DBSS.get_dbtable({"pet1": "select * from pet1",
+                      "pet2": "select * from pet2",
+                      "pet3": "select * from pet3"})
     DBSS.get_sql(
         "select * from pet1 union select * from pet2 union select * from pet3")
-    DBSS.get_dst_table("target")
+    DBSS.get_dst_table("target2")
     DBSS.get_spark_master("local[2]")
     DBSS.print_all()
-    #DBSS.run()
+    DBSS.run()
