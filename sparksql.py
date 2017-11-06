@@ -104,9 +104,11 @@ class DBScaleSparksql(object):
         """
             run sql on spark cluster
         """
+        # spark.sql.crossJoin.enabled = true
+        # support select t1.c1, t2.c2, ... from t1, t2, ...
         spark_session = SparkSession.builder.master(DBScaleSparksql.spark_master) \
             .appName("DBScale") \
-            .config("spark.some.config.option", "some-value") \
+            .config("spark.sql.crossJoin.enabled", "true") \
             .getOrCreate()
         spark_session = spark_session.newSession()
         for tablename, query in DBScaleSparksql.dbtable.items():
