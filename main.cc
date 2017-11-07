@@ -11,10 +11,7 @@ string gettime();
 int main()
 {
   run1();
-  for(int i = 0; i < 3; i++){
-    cout << endl;
-    sleep(1);
-  }
+  run1();
   run2();
 
   return 0;
