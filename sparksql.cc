@@ -10,7 +10,13 @@ using namespace dbscale;
 
 sparksql::sparksql()
 {
+    cout << endl
+         << "init\n"
+         << endl;
     Py_Initialize();
+    cout << endl
+         << "inited\n"
+         << endl;
     if (!Py_IsInitialized())
     {
         cout << "Error: Py_IsInitialized(): false" << endl;
@@ -47,11 +53,27 @@ sparksql::sparksql()
 
 sparksql::~sparksql()
 {
+    cout << endl
+         << "deleting\n"
+         << endl;
     Py_DECREF(this->py_module);
     Py_DECREF(this->py_moduledict);
     Py_DECREF(this->py_class_sparksql);
+    cout << endl
+         << "deleted\n"
+         << endl;
+}
+
+void sparksql::pyfinal()
+{
+    cout << endl
+         << "final\n"
+         << endl;
 
     Py_Finalize();
+    cout << endl
+         << "end\n"
+         << endl;
 }
 
 void sparksql::run()

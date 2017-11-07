@@ -24,6 +24,9 @@ public:
   string spark_master;
 
   void run();
+  void pyinit();
+  void pyfinal();
+  //void clear();
   sparksql();
   ~sparksql();
 
