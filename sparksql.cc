@@ -4,6 +4,7 @@
 
 #include "sparksql.h"
 #include <Python.h>
+#include "pyspark_exception.h"
 #include <iostream>
 
 using namespace dbscale;
@@ -24,7 +25,7 @@ sparksql::sparksql()
     }
     PyRun_SimpleString("import sys");
     // path to sparksql.py
-    PyRun_SimpleString("sys.path.append('../')");
+    PyRun_SimpleString("sys.path.append('.')");
 
     this->py_module = PyImport_ImportModule("sparksql");
     if (!this->py_module)
@@ -86,6 +87,78 @@ void sparksql::run()
         this->py_class_sparksql,
         PyString_FromString(py_meth_run.c_str()),
         NULL);
+
+    // PyObject *err = PyErr_Occurred();
+    // if (err)
+    // {
+    //     cout << "###############err occurred##########" << endl;
+    // }
+
+    // PyObject *type = NULL, *value = NULL, *traceback = NULL;
+
+    // PyErr_Fetch(&type, &value, &traceback);
+    // //PyErr_Restore(type, value, traceback);
+
+    // if (type)
+    // {
+    //     std::cout << "######################" << endl;
+    //     std::cout << PyExceptionClass_Name(type) << ": " << endl;
+    // }
+
+    // if (value)
+    // {
+    //     PyObject *line = PyObject_Str(value);
+    //     std::cout << PyString_AS_STRING(line) << endl;
+    // }
+
+    // if (traceback)
+    // {
+    //     PyObject *line = PyObject_Str(traceback);
+    //     std::cout << PyString_AS_STRING(line) << endl;
+    // }
+
+    // if (PyErr_Occurred())
+    // {
+    //     PyObject *ptype, *pvalue, *ptraceback;
+    //     PyObject *pystr, *module_name, *pyth_module, *pyth_func;
+    //     char *str;
+
+    //     PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+    //     char *type = PyString_AsString(PyObject_Str(ptype));
+    //     char *value = PyString_AsString(PyObject_Str(pvalue));
+
+    //     std::cout << type << endl;
+    //     std::cout << value << endl;
+
+    //     /* See if we can get a full traceback */
+    //     module_name = PyString_FromString("traceback");
+    //     pyth_module = PyImport_Import(module_name);
+    //     Py_DECREF(module_name);
+
+    //     if (pyth_module == NULL)
+    //     {
+    //         return;
+    //     }
+
+    //     pyth_func = PyObject_GetAttrString(pyth_module, "format_exception");
+    //     if (pyth_func && PyCallable_Check(pyth_func))
+    //     {
+    //         PyObject *pyth_val;
+
+    //         pyth_val = PyObject_CallFunctionObjArgs(pyth_func, ptype, pvalue, ptraceback, NULL);
+
+    //         char *traceback = PyString_AsString(PyObject_Str(pyth_val));
+    //         std::cout << traceback << endl;
+    //         Py_DECREF(pyth_val);
+    //     }
+    // }
+
+    pyspark_exception pe;
+    pe.pyerr_fetch();
+    cout << pe.type << endl;
+    cout << pe.description << endl;
+    cout << pe.traceback << endl;
+
     cout << "complete" << endl;
 }
 

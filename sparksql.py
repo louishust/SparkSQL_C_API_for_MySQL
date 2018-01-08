@@ -131,7 +131,8 @@ class DBScaleSparksql(object):
         return 1
 
 
-if __name__ == "__main__":
+
+def main():    
     """
         url = ""
         user = ""
@@ -142,7 +143,7 @@ if __name__ == "__main__":
         spark_master = ""
     """
     DBSS = DBScaleSparksql()
-    DBSS.get_url("jdbc:mysql://localhost:3306/test")
+    DBSS.get_url("jdbc:mysql://localhost:3306/test1")
     DBSS.get_user("root")
     DBSS.get_password("abc123")
     DBSS.get_dbtable({"pet1": "select * from pet1",
@@ -151,6 +152,10 @@ if __name__ == "__main__":
     DBSS.get_sql(
         "select * from pet1 union select * from pet2 union select * from pet3")
     DBSS.get_dst_table("target2")
-    DBSS.get_spark_master("local[2]")
+    DBSS.get_spark_master("local[4]")
     DBSS.print_all()
     DBSS.run()
+
+
+if __name__ == "__main__":
+    main()
